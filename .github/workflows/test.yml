@@ -1,0 +1,17 @@
+name: Test the Homebrew install
+on: [push, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: Homebrew/actions/setup-homebrew@main
+      - run: brew install --formula rahulchaube1/blyx/blyx
+      - run: brew test rahulchaube1/blyx/blyx
