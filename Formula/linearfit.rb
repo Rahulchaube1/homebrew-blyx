@@ -1,19 +1,19 @@
 class Linearfit < Formula
   desc "Fit a one-feature linear or ridge regression from a CSV"
   homepage "https://github.com/Rahulchaube1/blyx-linearfit"
-  version "0.1.0"
+  version "0.1.1"
   license any_of: ["MIT", "Apache-2.0"]
 
   on_macos do
     depends_on arch: :arm64
-    url "https://github.com/Rahulchaube1/blyx-linearfit/releases/download/v0.1.0/linearfit-macos-arm64.tar.gz"
-    sha256 "4034659e08502952d60bcd0c547f1f0f24bc2459ea3e0d66b3610557c3194270"
+    url "https://github.com/Rahulchaube1/blyx-linearfit/releases/download/v0.1.1/linearfit-macos-arm64.tar.gz"
+    sha256 "4f47131ce651440b1805d866f41361a5755fa5ee93f078bfedae7cb219cf42a7"
   end
 
   on_linux do
     depends_on arch: :x86_64
-    url "https://github.com/Rahulchaube1/blyx-linearfit/releases/download/v0.1.0/linearfit-linux-x64.tar.gz"
-    sha256 "ebe420e131075e2b297b2d29e04eaddf8d9c28f0126eb29541d31bc4c2086d71"
+    url "https://github.com/Rahulchaube1/blyx-linearfit/releases/download/v0.1.1/linearfit-linux-x64.tar.gz"
+    sha256 "26e9df5c69b097da1e36b17fa12bcc917302c040b324f86f1aa296bbe3196e3f"
   end
 
   def install
