@@ -21,3 +21,15 @@ brew test rahulchaube1/blyx/modelgate
 ```
 
 [ModelGate input and examples](https://github.com/Rahulchaube1/blyx-modelgate) · [Language guide](https://doc.blyx-lang.space/) · [Playground](https://www.blyx-lang.space/play) · [Compiler releases](https://github.com/Rahulchaube1/blyxxxx/releases)
+
+## Train and monitor regression models
+
+Install the native tools on Apple Silicon macOS or x86-64 Linux.
+
+```sh
+brew install rahulchaube1/blyx/linearfit rahulchaube1/blyx/residualwatch
+linearfit train.csv --predict 5
+residualwatch errors.csv --reference 100 --limit 5
+```
+
+LinearFit reads a CSV headed `x,y`. ResidualWatch reads time-ordered rows headed `actual,predicted`. Both emit JSON. An alert from ResidualWatch returns exit status 1. [LinearFit documentation](https://www.blyx-lang.space/packages/linearfit) · [ResidualWatch documentation](https://www.blyx-lang.space/packages/residualwatch)
