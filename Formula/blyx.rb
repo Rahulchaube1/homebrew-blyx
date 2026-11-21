@@ -1,19 +1,19 @@
 class Blyx < Formula
   desc "Compiler and interpreter for the Blyx programming language"
   homepage "https://www.blyx-lang.space/"
-  version "0.2.0"
+  version "0.2.1"
   license any_of: ["MIT", "Apache-2.0"]
 
   on_macos do
     depends_on arch: :arm64
-    url "https://github.com/Rahulchaube1/blyxxxx/releases/download/v0.2.0/blyx-v0.2.0-aarch64-apple-darwin.tar.gz"
-    sha256 "801c74f8df62d1ecb7eb8c57e1fa90550f2d18420c66b26b1b0d8c7121004d28"
+    url "https://github.com/Rahulchaube1/blyxxxx/releases/download/v0.2.1/blyx-v0.2.1-aarch64-apple-darwin.tar.gz"
+    sha256 "0778e0cd7a2d7941e6c90ec346530c57df25325b8513729ee0e0c24c317b8e34"
   end
 
   on_linux do
     depends_on arch: :x86_64
-    url "https://github.com/Rahulchaube1/blyxxxx/releases/download/v0.2.0/blyx-v0.2.0-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "74a81c9053c866fb729f17646b6f0f6dc6b0b78f684037073e7160160e62bfda"
+    url "https://github.com/Rahulchaube1/blyxxxx/releases/download/v0.2.1/blyx-v0.2.1-x86_64-unknown-linux-gnu.tar.gz"
+    sha256 "792d5310bed715b2f6a2b7249606428f9ab2e8a57bdbd9abaff85d8aca2c1bdc"
   end
 
   def install

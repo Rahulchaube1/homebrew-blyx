@@ -15,3 +15,5 @@ jobs:
       - uses: Homebrew/actions/setup-homebrew@main
       - run: brew install --formula rahulchaube1/blyx/blyx
       - run: brew test rahulchaube1/blyx/blyx
+      - run: brew install --formula rahulchaube1/blyx/modelgate
+      - run: brew test rahulchaube1/blyx/modelgate
