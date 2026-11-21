@@ -21,3 +21,5 @@ jobs:
       - run: brew test rahulchaube1/blyx/linearfit
       - run: brew install --formula rahulchaube1/blyx/residualwatch
       - run: brew test rahulchaube1/blyx/residualwatch
+      - run: brew install --formula rahulchaube1/blyx/blyxtorch
+      - run: brew test rahulchaube1/blyx/blyxtorch

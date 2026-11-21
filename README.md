@@ -33,3 +33,15 @@ residualwatch errors.csv --reference 100 --limit 5
 ```
 
 LinearFit reads a CSV headed `x,y`. ResidualWatch reads time-ordered rows headed `actual,predicted`. Both emit JSON. An alert from ResidualWatch returns exit status 1. [LinearFit documentation](https://www.blyx-lang.space/packages/linearfit) · [ResidualWatch documentation](https://www.blyx-lang.space/packages/residualwatch)
+
+## Train a dense network
+
+Install the CPU trainer and Blyx model generator on Apple Silicon macOS or x86-64 Linux.
+
+```sh
+brew install rahulchaube1/blyx/blyxtorch
+blyxtorch --version
+blyxtorch emit 2,8,3 softmax relu > classifier.blyx
+```
+
+The default network trains directly on two-feature binary data. [BlyxTorch training guide](https://doc.blyx-lang.space/guide/blyxtorch)
