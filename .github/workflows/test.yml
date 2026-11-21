@@ -23,3 +23,10 @@ jobs:
       - run: brew test rahulchaube1/blyx/residualwatch
       - run: brew install --formula rahulchaube1/blyx/blyxtorch
       - run: brew test rahulchaube1/blyx/blyxtorch
+      - name: Install and run the Blyx source collection
+        run: |
+          brew install --formula rahulchaube1/blyx/blyx-packages
+          brew test rahulchaube1/blyx/blyx-packages
+          project="$(brew --prefix rahulchaube1/blyx/blyx-packages)/share/blyx/moments"
+          blyxc native-run "$project/main.blyx" > "$RUNNER_TEMP/blyx-moments.txt"
+          diff -u "$project/expected.txt" "$RUNNER_TEMP/blyx-moments.txt"

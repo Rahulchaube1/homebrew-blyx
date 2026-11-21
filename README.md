@@ -46,6 +46,17 @@ blyxtorch emit 2,8,3 softmax relu > classifier.blyx
 
 The default network trains directly on two-feature binary data. [BlyxTorch training guide](https://doc.blyx-lang.space/guide/blyxtorch)
 
+## Install the framework and library sources
+
+The collection includes 65 frameworks and 107 libraries. Each project has a runnable example, its expected output, and a vendor directory you can copy into your own program. Install Rust and a host linker to compile the examples with Blyx.
+
+```sh
+brew install rahulchaube1/blyx/blyx-packages
+blyxc native-run "$(brew --prefix rahulchaube1/blyx/blyx-packages)/share/blyx/moments/main.blyx"
+```
+
+Moments prints 3, 12 and 2 on separate lines. [Individual packages in Conda](https://rahulchaube1.github.io/blyx-packages/) · [Release files and checksums](https://github.com/Rahulchaube1/blyx-packages/releases)
+
 ## Connect with Rahul Chaube
 
 [Portfolio](https://www.rahulchaube1.com/) · [GitHub](https://github.com/Rahulchaube1) · [LinkedIn](https://www.linkedin.com/in/rahulchaube1) · [Hugging Face](https://huggingface.co/oncody) · [X](https://x.com/RahulChaube_) · [EverestQ](https://www.everestqai.com/) · [Contact](https://www.rahulchaube1.com/contact)
