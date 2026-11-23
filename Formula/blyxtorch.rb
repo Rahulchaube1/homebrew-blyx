@@ -1,34 +1,37 @@
 require "json"
 
 class Blyxtorch < Formula
-  desc "Train CPU convolutions, transformers and sparse embeddings in Blyx"
+  desc "Train neural networks in Blyx on CPU or Vulkan GPU"
   homepage "https://github.com/Rahulchaube1/blyxtorch"
-  version "0.3.0"
+  version "0.4.0"
   license any_of: ["MIT", "Apache-2.0"]
 
   on_macos do
     depends_on arch: :arm64
-    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.3.0/blyxtorch-macos-arm64.tar.gz"
-    sha256 "3c54ee332fafe5ad7dec71d388f9909625e0f26cb1d85f0dc2aa43c1b4ca4f71"
+    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.4.0/blyxtorch-macos-arm64.tar.gz"
+    sha256 "ecfc3b02d2da5d3b4903a103a1b962cf8724c793c6f6234f86ce18ec0bb63221"
   end
 
   on_linux do
     depends_on arch: :x86_64
-    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.3.0/blyxtorch-linux-x64.tar.gz"
-    sha256 "6d512dae13a3abccecc68796c463798315a402ea917a1c3fb5becdf95d021aea"
+    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.4.0/blyxtorch-linux-x64.tar.gz"
+    sha256 "dcf27f3c5cc053855bf3453c4372752330f9d694b04fb1ce308d33524c154cc4"
   end
 
   def install
-    libexec.install "blyxtorch", "blyxtorch.blyx", "training.blyx"
+    libexec.install "blyxtorch", "blyxtorch.blyx", "training.blyx", "device_fit.py"
     bin.write_exec_script libexec/"blyxtorch"
     pkgshare.install "fixtures", "assets", "projects"
     pkgshare.install "tensor_ops.blyx", "convolution.blyx", "attention.blyx", "transformer.blyx",
-                     "embedding.blyx", "sequence_example.blyx", "LAYERS.md"
+                     "embedding.blyx", "sequence_example.blyx", "LAYERS.md", "PORTABLE.md", "provider-tools.mjs"
+    pkgshare.install "probe.blyx", "probe_cli.blyx", "probe_graph.blyx", "layer_graph.blyx", "numeric_io.blyx"
     pkgshare.install_symlink libexec/"blyxtorch.blyx"
   end
 
   test do
     assert_path_exists pkgshare/"assets/logo.png"
+    assert_path_exists libexec/"device_fit.py"
+    assert_match "stablehlo.dot_general", shell_output("#{bin}/blyxtorch probe-graph train 2 3 2")
     assert_match "transformer loss", shell_output("#{bin}/blyxtorch layer-demo")
     data = pkgshare/"projects/print-queue"
     heldout = JSON.parse(shell_output("#{bin}/blyxtorch train-score #{data}/train.csv #{data}/holdout.csv 180 0.03 4 adam 7"))
