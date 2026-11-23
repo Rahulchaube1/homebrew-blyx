@@ -1,31 +1,35 @@
 require "json"
 
 class Blyxtorch < Formula
-  desc "Train fixed-shape dense networks and emit standalone Blyx models"
+  desc "Train CPU convolutions, transformers and sparse embeddings in Blyx"
   homepage "https://github.com/Rahulchaube1/blyxtorch"
-  version "0.2.0"
+  version "0.3.0"
   license any_of: ["MIT", "Apache-2.0"]
 
   on_macos do
     depends_on arch: :arm64
-    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.2.0/blyxtorch-macos-arm64.tar.gz"
-    sha256 "a102f5f5279721d976bd24c7c60dd68739d1f7ea3323628eceddc22b03acbb35"
+    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.3.0/blyxtorch-macos-arm64.tar.gz"
+    sha256 "3c54ee332fafe5ad7dec71d388f9909625e0f26cb1d85f0dc2aa43c1b4ca4f71"
   end
 
   on_linux do
     depends_on arch: :x86_64
-    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.2.0/blyxtorch-linux-x64.tar.gz"
-    sha256 "470caa87ee3d1cc90fad795a640cd3f4036260eaa3eb6e736aa29654014d57b0"
+    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.3.0/blyxtorch-linux-x64.tar.gz"
+    sha256 "6d512dae13a3abccecc68796c463798315a402ea917a1c3fb5becdf95d021aea"
   end
 
   def install
     libexec.install "blyxtorch", "blyxtorch.blyx", "training.blyx"
     bin.write_exec_script libexec/"blyxtorch"
     pkgshare.install "fixtures", "assets", "projects"
+    pkgshare.install "tensor_ops.blyx", "convolution.blyx", "attention.blyx", "transformer.blyx",
+                     "embedding.blyx", "sequence_example.blyx", "LAYERS.md"
+    pkgshare.install_symlink libexec/"blyxtorch.blyx"
   end
 
   test do
     assert_path_exists pkgshare/"assets/logo.png"
+    assert_match "transformer loss", shell_output("#{bin}/blyxtorch layer-demo")
     data = pkgshare/"projects/print-queue"
     heldout = JSON.parse(shell_output("#{bin}/blyxtorch train-score #{data}/train.csv #{data}/holdout.csv 180 0.03 4 adam 7"))
     assert_equal 6, heldout.fetch("rows")
