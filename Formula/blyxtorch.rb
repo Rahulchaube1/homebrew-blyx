@@ -1,24 +1,26 @@
 require "json"
 
 class Blyxtorch < Formula
-  desc "Train neural networks in Blyx on CPU or Vulkan GPU"
+  desc "Train neural networks and differentiate quantum circuits in Blyx"
   homepage "https://github.com/Rahulchaube1/blyxtorch"
-  version "0.4.0"
+  version "0.5.0"
   license any_of: ["MIT", "Apache-2.0"]
 
   on_macos do
     depends_on arch: :arm64
-    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.4.0/blyxtorch-macos-arm64.tar.gz"
-    sha256 "ecfc3b02d2da5d3b4903a103a1b962cf8724c793c6f6234f86ce18ec0bb63221"
+    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.5.0/blyxtorch-macos-arm64.tar.gz"
+    sha256 "80b962f635d6a1f1e5c905307161c096d674910cc4e91c031b848a389c22ba7d"
   end
 
   on_linux do
     depends_on arch: :x86_64
-    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.4.0/blyxtorch-linux-x64.tar.gz"
-    sha256 "dcf27f3c5cc053855bf3453c4372752330f9d694b04fb1ce308d33524c154cc4"
+    url "https://github.com/Rahulchaube1/blyxtorch/releases/download/v0.5.0/blyxtorch-linux-x64.tar.gz"
+    sha256 "93d22831b4b9ea94b0286c3c5cb910e0660822f665e1a9f1a7d08b42088653c2"
   end
 
   def install
+    bin.install "quantum-study"
+    pkgshare.install "quantum.blyx", "quantum_cli.blyx", "quantum_study.blyx", "scale_example.blyx", "SCALE.md"
     libexec.install "blyxtorch", "blyxtorch.blyx", "training.blyx", "device_fit.py"
     bin.write_exec_script libexec/"blyxtorch"
     pkgshare.install "fixtures", "assets", "projects"
@@ -29,6 +31,7 @@ class Blyxtorch < Formula
   end
 
   test do
+    assert_match "OPENQASM 3.0", shell_output("#{bin}/blyxtorch q-qasm 2 1 0.3,-0.7")
     assert_path_exists pkgshare/"assets/logo.png"
     assert_path_exists libexec/"device_fit.py"
     assert_match "stablehlo.dot_general", shell_output("#{bin}/blyxtorch probe-graph train 2 3 2")

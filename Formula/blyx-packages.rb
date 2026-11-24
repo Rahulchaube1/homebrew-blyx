@@ -3,9 +3,9 @@ require "json"
 class BlyxPackages < Formula
   desc "Blyx framework and library source collection with runnable examples"
   homepage "https://www.blyx-lang.space/packages"
-  url "https://github.com/Rahulchaube1/blyx-packages/releases/download/v2026.11.22/blyx-packages-2026.11.22.zip"
-  version "2026.11.22"
-  sha256 "d5a24a51a5ad3882afb81c40db68c360c2828d6d904a7745085c6898ee084057"
+  url "https://github.com/Rahulchaube1/blyx-packages/releases/download/v2026.11.24/blyx-packages-2026.11.24.zip"
+  version "2026.11.24"
+  sha256 "8fafada7dfbddafec039c49ea574997e7bc244c45e506f2fa26e0c7e832e6e45"
   license any_of: ["MIT", "Apache-2.0"]
 
   def install

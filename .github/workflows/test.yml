@@ -23,6 +23,18 @@ jobs:
       - run: brew test rahulchaube1/blyx/residualwatch
       - run: brew install --formula rahulchaube1/blyx/blyxtorch
       - run: brew test rahulchaube1/blyx/blyxtorch
+      - name: Check sharded training commands
+        run: |
+          for framework in albatross kinglet chaffinch; do
+            brew install --formula "rahulchaube1/blyx/$framework"
+            brew test "rahulchaube1/blyx/$framework"
+          done
+      - name: Check sharded training commands
+        run: |
+          for framework in albatross kinglet chaffinch; do
+            brew install --formula "rahulchaube1/blyx/$framework"
+            brew test "rahulchaube1/blyx/$framework"
+          done
       - name: Install and run the Blyx source collection
         run: |
           brew install --formula rahulchaube1/blyx/blyx-packages
